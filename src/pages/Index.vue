@@ -1,11 +1,7 @@
 <template>
   <q-page padding>
     <ul>
-      <li v-for="(task, index) in tasks" :key="index">
-        <div>{{ task.name }}</div>
-        <small>{{ task.dueDate }} @ {{ task.dueTime }}</small>
-        <button @click="deleteTask(index)">X</button>
-      </li>
+      <task v-for="(task, index) in tasks" :task="task" :index="index" :key="index" />
     </ul>
   </q-page>
 </template>
@@ -19,6 +15,9 @@ const tasks = [
 
 export default {
   name: 'PageIndex',
+  components: {
+    'task': require('components/Task').default,
+  },
   data() {
     return {
       tasks: tasks,
