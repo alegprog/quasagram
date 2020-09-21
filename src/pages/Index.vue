@@ -1,95 +1,36 @@
 <template>
   <q-page padding>
-    <button
-      type="button"
-      style="position: absolute; right: 10px;"
-      @click="++counter"
-    >
-      {{ counter }}
-    </button>
-
-    <input
-      type="text"
-      v-model="message"
-      @keyup.esc="clearMessage"
-      @keyup.enter="alertMessage"
-      v-autofocus
-      :class="{'error': message.length > 22}"
-      ref="messageInput"
-    />
-    <button type="button" @click="clearMessage">Clear</button>
-    <div>{{ message.length }}</div>
-    <h5
-      v-if="message.length"
-      class="border-gray"
-    >
-      {{ message }}
-    </h5>
-    <h6 v-else>No message entered &#x1F61C;!</h6>
-    <hr>
-    <p>Uppercase message: {{ messageUppercase }}</p>
-    <p>Lowercase message: {{ message | messageLowercase }}</p>
+    <ul>
+      <li v-for="(task, index) in tasks" :key="index">
+        <div>{{ task.name }}</div>
+        <small>{{ task.dueDate }} @ {{ task.dueTime }}</small>
+        <button @click="deleteTask(index)">X</button>
+      </li>
+    </ul>
   </q-page>
 </template>
 
 <script>
+const tasks = [
+  { name: 'Go to shop', dueDate: '2019-05-12', dueTime: '18:30'},
+  { name: 'Get bananas', dueDate: '2019-05-13', dueTime: '02:00'},
+  { name: 'Get apples', dueDate: '2019-05-14', dueTime: '16:00'},
+];
+
 export default {
   name: 'PageIndex',
   data() {
     return {
-      message: 'I love Vuejs!',
-      counter: 0,
-    }
-  },
-  computed: {
-    messageUppercase() {
-      return this.message.toUpperCase();
-    },
-    errorStyle() {
-      if (this.message.length > 22) {
-        return {
-          'color': 'red',
-          'background': 'pink',
-        }
-      }
+      tasks: tasks,
     }
   },
   methods: {
-    clearMessage() {
-      this.message = '';
-    },
-    alertMessage() {
-      alert(this.message);
-    },
-  },
-  filters: {
-    messageLowercase(value) {
-      return value.toLowerCase();
+    deleteTask(index) {
+      this.tasks.splice(index, 1);
     }
-  },
-  directives: {
-    autofocus: {
-      inserted(el) {
-        el.focus();
-      }
-    }
-  },
-  mounted() {
-    console.log(this.$refs);
-    this.$refs.messageInput.className = 'bg-green';
   },
 }
 </script>
 
 <style lang="scss" scoped>
-  input, button {
-    font-size: 23px;
-  }
-  .border-gray {
-    border: 1px solid gray;
-  }
-  .error {
-    color: red;
-    background: pink;
-  }
 </style>
