@@ -5,10 +5,15 @@
       v-model="message"
       @keyup.esc="clearMessage"
       @keyup.enter="alertMessage"
-      @mouseenter="alertMessage"
     />
     <button type="button" @click="clearMessage">Clear</button>
-    <h5>{{ message }}</h5>
+    <h5
+      v-if="message.length"
+      class="border-gray"
+    >
+      {{ message }}
+    </h5>
+    <h6 v-else>No message entered &#x1F61C;!</h6>
   </q-page>
 </template>
 
@@ -30,3 +35,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .border-gray {
+    border: 1px solid gray;
+  }
+</style>
