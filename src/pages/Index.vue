@@ -1,6 +1,12 @@
 <template>
   <q-page padding>
-    <input type="text" v-model="message" @keyup="handleKeyup" />
+    <input
+      type="text"
+      v-model="message"
+      @keyup.esc="clearMessage"
+      @keyup.enter="alertMessage"
+      @mouseenter="alertMessage"
+    />
     <button type="button" @click="clearMessage">Clear</button>
     <h5>{{ message }}</h5>
   </q-page>
@@ -17,13 +23,6 @@ export default {
   methods: {
     clearMessage() {
       this.message = '';
-    },
-    handleKeyup(e) {
-      if (e.keyCode === 27) { // Esc key
-        this.clearMessage();
-      } else if(e.keyCode === 13) { // Enter key
-        this.alertMessage();
-      }
     },
     alertMessage() {
       alert(this.message);
