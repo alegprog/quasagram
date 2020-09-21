@@ -14,7 +14,7 @@
       @keyup.esc="clearMessage"
       @keyup.enter="alertMessage"
       v-autofocus
-      :class="{'error': message.length > 22}"
+      :style="errorStyle"
     />
     <button type="button" @click="clearMessage">Clear</button>
     <div>{{ message.length }}</div>
@@ -44,6 +44,14 @@ export default {
     messageUppercase() {
       return this.message.toUpperCase();
     },
+    errorStyle() {
+      if (this.message.length > 22) {
+        return {
+          'color': 'red',
+          'background': 'pink',
+        }
+      }
+    }
   },
   methods: {
     clearMessage() {
