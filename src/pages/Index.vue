@@ -82,8 +82,8 @@ export default {
   beforeMount() {
     console.log('beforeMount');
   },
-  Mounted() {
-    console.log('Mounted');
+  mounted() {
+    console.log('mounted');
   },
   beforeUpdate() {
     console.log('beforeUpdate');
