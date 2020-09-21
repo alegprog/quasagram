@@ -13,8 +13,11 @@
       v-model="message"
       @keyup.esc="clearMessage"
       @keyup.enter="alertMessage"
+      v-autofocus
+      :class="{'error': message.length > 22}"
     />
     <button type="button" @click="clearMessage">Clear</button>
+    <div>{{ message.length }}</div>
     <h5
       v-if="message.length"
       class="border-gray"
@@ -55,11 +58,25 @@ export default {
       return value.toLowerCase();
     }
   },
+  directives: {
+    autofocus: {
+      inserted(el) {
+        el.focus();
+      }
+    }
+  }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+  input, button {
+    font-size: 23px;
+  }
   .border-gray {
     border: 1px solid gray;
+  }
+  .error {
+    color: red;
+    background: pink;
   }
 </style>
