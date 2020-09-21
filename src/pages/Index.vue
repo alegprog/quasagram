@@ -1,5 +1,13 @@
 <template>
   <q-page padding>
+    <button
+      type="button"
+      style="position: absolute; right: 10px;"
+      @click="++counter"
+    >
+      {{ counter }}
+    </button>
+
     <input
       type="text"
       v-model="message"
@@ -14,6 +22,9 @@
       {{ message }}
     </h5>
     <h6 v-else>No message entered &#x1F61C;!</h6>
+    <hr>
+    <p>Uppercase message: {{ messageUppercase }}</p>
+    <p>Lowercase message: {{ message | messageLowercase }}</p>
   </q-page>
 </template>
 
@@ -23,7 +34,13 @@ export default {
   data() {
     return {
       message: 'I love Vuejs!',
+      counter: 0,
     }
+  },
+  computed: {
+    messageUppercase() {
+      return this.message.toUpperCase();
+    },
   },
   methods: {
     clearMessage() {
@@ -31,8 +48,13 @@ export default {
     },
     alertMessage() {
       alert(this.message);
+    },
+  },
+  filters: {
+    messageLowercase(value) {
+      return value.toLowerCase();
     }
-  }
+  },
 }
 </script>
 
