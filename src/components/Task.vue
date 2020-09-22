@@ -2,7 +2,7 @@
   <li>
     <div>{{ index }} - <slot></slot></div>
     <small>{{ task.dueDate }} @ {{ task.dueTime }}</small>
-    <button @click="deleteTask(index)">X</button>
+    <button @click="deleteTask(task.id)">X</button>
   </li>
 </template>
 <script>
@@ -11,6 +11,11 @@ export default {
   props: [
     'task', 'index'
   ],
+  methods: {
+    deleteTask(id) {
+      this.$emit('delete-task', id);
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

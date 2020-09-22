@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <ul>
-      <task v-for="(task, index) in tasks" :task="task" :index="index" :key="index">
+      <task v-for="task in tasks" :task="task" :key="task.id" v-on:delete-task="deleteTask">
         {{ task.name }}
       </task>
     </ul>
@@ -10,9 +10,9 @@
 
 <script>
 const tasks = [
-  { name: 'Go to shop', dueDate: '2019-05-12', dueTime: '18:30'},
-  { name: 'Get bananas', dueDate: '2019-05-13', dueTime: '02:00'},
-  { name: 'Get apples', dueDate: '2019-05-14', dueTime: '16:00'},
+  { id: 1, name: 'Go to shop', dueDate: '2019-05-12', dueTime: '18:30'},
+  { id: 2, name: 'Get bananas', dueDate: '2019-05-13', dueTime: '02:00'},
+  { id: 3, name: 'Get apples', dueDate: '2019-05-14', dueTime: '16:00'},
 ];
 
 export default {
@@ -26,8 +26,8 @@ export default {
     }
   },
   methods: {
-    deleteTask(index) {
-      this.tasks.splice(index, 1);
+    deleteTask(event) {
+      this.tasks = [...this.tasks.filter(task => task.id !== event)];
     }
   },
 }
