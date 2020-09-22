@@ -1,6 +1,6 @@
 <template>
   <li>
-    <div>{{ task.name }}</div>
+    <div>{{ index }} - <slot></slot></div>
     <small>{{ task.dueDate }} @ {{ task.dueTime }}</small>
     <button @click="deleteTask(index)">X</button>
   </li>

@@ -1,7 +1,9 @@
 <template>
   <q-page padding>
     <ul>
-      <task v-for="(task, index) in tasks" :task="task" :index="index" :key="index" />
+      <task v-for="(task, index) in tasks" :task="task" :index="index" :key="index">
+        {{ task.name }}
+      </task>
     </ul>
   </q-page>
 </template>
