@@ -33,6 +33,7 @@
     </q-footer>
     <q-drawer
       v-model="leftDrawerOpen"
+      :breakpoint="767"
       show-if-above
       bordered
       content-class="bg-grey-1"
@@ -75,7 +76,7 @@ const linksData = [
 ];
 
 export default {
-  name: 'MainLayout',
+  name: 'Layout',
   components: { EssentialLink },
   data () {
     return {
@@ -85,3 +86,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@media screen and (min-width: 768px) {
+  .q-footer {
+    display: none;
+  }
+}
+</style>
