@@ -7,7 +7,7 @@
       :tasks="tasksTodo"
       bgColor="bg-orange-4" />
 
-    <no-tasks v-else @showAddTask="showAddTask = true" />
+    <no-tasks v-else />
 
     <tasks
       v-if="Object.keys(tasksCompleted).length"
@@ -47,6 +47,9 @@ export default {
   },
   computed: {
     ...mapGetters('tasks', ['tasksTodo', 'tasksCompleted']),
+  },
+  mounted() {
+    this.$root.$on('showAddTask', () => this.showAddTask = true);
   }
 }
 </script>
