@@ -36,7 +36,7 @@ export default {
   name: 'PageIndex',
   data() {
     return {
-      showAddTask: false,
+      showAddTask: true,
     }
   },
   components: {

@@ -1,35 +1,9 @@
 <template>
   <q-card>
-    <q-card-section class="row justify-between">
-      <div class="text-h6">Add Task</div>
-      <q-btn
-        flat round
-        v-close-popup
-        color="dark"
-        icon="close"
-      />
-    </q-card-section>
+    <modal-header>Add Task</modal-header>
     <form @submit.prevent="submitForm">
       <q-card-section>
-        <div class="row q-mb-sm">
-          <q-input
-            outlined
-            autofocus
-            v-model="taskToSubmit.name"
-            :rules="[val => !!val || 'Field is required']"
-            ref="name"
-            label="Task name"
-            class="col">
-            <template v-slot:append>
-              <q-icon
-                v-if="taskToSubmit.name"
-                name="close"
-                @click="taskToSubmit.name = ''"
-                class="cursor-pointer" />
-            </template>
-          </q-input>
-        </div>
-
+        <modal-task-name :name.sync="taskToSubmit.name" />
         <div class="row q-mb-sm">
           <q-input outlined label="Due Date" v-model="taskToSubmit.dueDate" class="col">
             <template v-slot:append>
@@ -90,6 +64,10 @@
 import { mapActions } from 'vuex';
 
 export default {
+  components: {
+    'modal-header': require('components/Tasks/Modals/Shared/ModalHeader').default,
+    'modal-task-name': require('components/Tasks/Modals/Shared/ModalTaskName').default,
+  },
   data() {
     return {
       taskToSubmit: {
