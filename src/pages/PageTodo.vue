@@ -1,6 +1,9 @@
 <template>
   <q-page class="q-pa-md">
-    <q-list separator bordered>
+    <q-list
+      v-if="Object.keys(tasks).length"
+      separator
+      bordered>
 
       <task
         v-for="(task, key) in tasks"
@@ -10,6 +13,7 @@
       />
 
     </q-list>
+    <div v-else>No tasks yet!</div>
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
         @click="showAddTask = true"
@@ -20,7 +24,7 @@
       />
     </div>
       <q-dialog v-model="showAddTask">
-        <add-task />
+        <add-task @close="showAddTask = false" />
       </q-dialog>
   </q-page>
 </template>
@@ -32,7 +36,7 @@ export default {
   name: 'PageIndex',
   data() {
     return {
-      showAddTask: true,
+      showAddTask: false,
     }
   },
   components: {
