@@ -1,11 +1,19 @@
 <template>
   <q-page class="q-pa-md">
 
-    <tasks :tasks="tasksTodo" />
+    <tasks
+      v-if="Object.keys(tasksTodo).length"
+      title="Todo"
+      :tasks="tasksTodo"
+      bgColor="bg-orange-4" />
 
-    <hr>
+    <no-tasks v-else @showAddTask="showAddTask = true" />
 
-    <tasks :tasks="tasksCompleted" />
+    <tasks
+      v-if="Object.keys(tasksCompleted).length"
+      title="Completed"
+      :tasks="tasksCompleted"
+      bgColor="bg-green-4" />
 
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
@@ -34,6 +42,7 @@ export default {
   },
   components: {
     'tasks': require('components/Tasks/Tasks').default,
+    'no-tasks': require('components/Tasks/NoTasks').default,
     'add-task': require('components/Tasks/Modals/AddTask').default,
   },
   computed: {
