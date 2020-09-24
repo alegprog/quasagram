@@ -1,28 +1,11 @@
 <template>
   <q-page class="q-pa-md">
-    <q-list
-      v-if="Object.keys(tasks).length"
-      separator
-      bordered>
 
-      <task
-        v-for="(task, key) in tasks"
-        :key="key"
-        :task="task"
-        :id="key"
-      />
+    <tasks :tasks="tasksTodo" />
 
-    </q-list>
+    <hr>
 
-    <q-list v-else bordered>
-      <q-item>
-        <q-item-section>
-          <q-item-label>
-            No tasks yet!
-          </q-item-label>
-        </q-item-section>
-      </q-item>
-    </q-list>
+    <tasks :tasks="tasksCompleted" />
 
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
@@ -50,11 +33,11 @@ export default {
     }
   },
   components: {
-    'task': require('components/Tasks/Task').default,
+    'tasks': require('components/Tasks/Tasks').default,
     'add-task': require('components/Tasks/Modals/AddTask').default,
   },
   computed: {
-    ...mapGetters('tasks', ['tasks']),
+    ...mapGetters('tasks', ['tasksTodo', 'tasksCompleted']),
   }
 }
 </script>
