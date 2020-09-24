@@ -13,7 +13,17 @@
       />
 
     </q-list>
-    <div v-else>No tasks yet!</div>
+
+    <q-list v-else bordered>
+      <q-item>
+        <q-item-section>
+          <q-item-label>
+            No tasks yet!
+          </q-item-label>
+        </q-item-section>
+      </q-item>
+    </q-list>
+
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
         @click="showAddTask = true"
@@ -23,9 +33,9 @@
         icon="add"
       />
     </div>
-      <q-dialog v-model="showAddTask">
-        <add-task @close="showAddTask = false" />
-      </q-dialog>
+    <q-dialog v-model="showAddTask">
+      <add-task @close="showAddTask = false" />
+    </q-dialog>
   </q-page>
 </template>
 
@@ -36,7 +46,7 @@ export default {
   name: 'PageIndex',
   data() {
     return {
-      showAddTask: true,
+      showAddTask: false,
     }
   },
   components: {
