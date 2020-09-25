@@ -140,10 +140,26 @@ export default {
     },
     getLocation() {
       navigator.geolocation.getCurrentPosition(position => {
-        console.log('position: ', position);
+        this.getCityandCountry(position);
       }, error => {
-        console.log('err: ', error);
+        console.error('err: ', error);
       }, { timeout: 7000 });
+    },
+    getCityandCountry(position) {
+      let apiUrl = `${ process.env.VUE_APP_API_URL_GEOLOCATION }/${ position.coords.latitude },${ position.coords.longitude }?json=1`;
+
+      this.$axios.get(apiUrl).then(result => {
+        this.locationSuccess(result);
+      }).catch(error => {
+        console.error(error);
+      });
+    },
+    locationSuccess(result) {
+      this.post.location = result.data.city;
+
+      if (result.data.country) {
+        this.post.location += `, ${ result.data.country }`;
+      }
     },
   },
   mounted() {
