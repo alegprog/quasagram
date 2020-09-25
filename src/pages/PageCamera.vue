@@ -48,12 +48,14 @@
       <div class="row justify-center q-ma-md">
         <q-input
           v-model="post.location"
+          :loading="locationLoading"
           class="col col-sm-6"
           label="Location"
           dense
           >
             <template v-slot:append>
               <q-btn
+                v-if="!locationLoading && locationSupported"
                 @click="getLocation"
                 round dense flat
                 icon="eva-navigation-2-outline" />
@@ -92,6 +94,12 @@ export default {
       imageCaptured: false,
       imageUpload: [],
       hasCameraSupport: true,
+      locationLoading: false,
+    }
+  },
+  computed: {
+    locationSupported() {
+      return ('geolocation' in navigator);
     }
   },
   methods: {
@@ -139,10 +147,11 @@ export default {
       });
     },
     getLocation() {
+      this.locationLoading = true;
       navigator.geolocation.getCurrentPosition(position => {
         this.getCityandCountry(position);
-      }, error => {
-        console.error('err: ', error);
+      }, () => {
+        this.locationError();
       }, { timeout: 7000 });
     },
     getCityandCountry(position) {
@@ -150,8 +159,8 @@ export default {
 
       this.$axios.get(apiUrl).then(result => {
         this.locationSuccess(result);
-      }).catch(error => {
-        console.error(error);
+      }).catch(() => {
+        this.locationError();
       });
     },
     locationSuccess(result) {
@@ -160,6 +169,14 @@ export default {
       if (result.data.country) {
         this.post.location += `, ${ result.data.country }`;
       }
+      this.locationLoading = false;
+    },
+    locationError() {
+      this.$q.dialog({
+        title: 'Error',
+        message: 'Could not find your location!'
+      });
+      this.locationLoading = false;
     },
   },
   mounted() {
