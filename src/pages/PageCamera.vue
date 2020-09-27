@@ -182,6 +182,8 @@ export default {
       this.locationLoading = false;
     },
     addPost() {
+      this.$q.loading.show();
+
       let formData = new FormData();
       formData.append('id', this.post.id);
       formData.append('caption', this.post.caption);
@@ -198,8 +200,14 @@ export default {
             { label: 'Dismiss', color: 'white' }
           ]
         });
+        this.$q.loading.hide();
       }).catch(error => {
         console.log('error', error);
+        this.$q.dialog({
+          title: 'Error',
+          message: 'Could not create post!'
+        });
+        this.$q.loading.hide();
       });
     },
   },
