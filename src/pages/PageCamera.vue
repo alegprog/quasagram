@@ -66,7 +66,7 @@
       <div class="row justify-center q-mt-lg">
         <q-btn
           @click="addPost"
-          :disabled="!post.caption || !post.photo"
+          :disable="!post.caption || !post.photo"
           unelevated
           rounded
           color="primary"
@@ -191,6 +191,13 @@ export default {
 
       this.$axios.post(`${ process.env.VUE_APP_API_PRODUCTION }/posts`, formData).then(response => {
         console.log('response: ', response);
+        this.$router.push('/');
+        this.$q.notify({
+          message: 'Post Created!',
+          actions: [
+            { label: 'Dismiss', color: 'white' }
+          ]
+        });
       }).catch(error => {
         console.log('error', error);
       });
