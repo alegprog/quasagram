@@ -18,12 +18,15 @@
   </q-input>
 </template>
 <script>
+import { mapState } from 'vuex';
+
 export default {
-  data() {
-    return {
-      searchField: '',
-    }
-  }
+  computed: {
+    ...mapState('tasks', ['search']),
+    searchField() {
+      return this.search;
+    },
+  },
 }
 </script>
 <style>

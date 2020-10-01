@@ -21,7 +21,8 @@ const state = {
       dueDate: '2019-05-14',
       dueTime: '12:30'
     }
-  }
+  },
+  search: 'Test',
 };
 
 const mutations = {
