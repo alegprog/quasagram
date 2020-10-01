@@ -1,6 +1,10 @@
 <template>
   <q-page class="q-pa-md">
 
+    <div class="row q-mb-lg">
+      <search />
+    </div>
+
     <tasks
       v-if="Object.keys(tasksTodo).length"
       title="Todo"
@@ -44,6 +48,7 @@ export default {
     'tasks': require('components/Tasks/Tasks').default,
     'no-tasks': require('components/Tasks/NoTasks').default,
     'add-task': require('components/Tasks/Modals/AddTask').default,
+    'search': require('components/Tasks/Tools/Search').default,
   },
   computed: {
     ...mapGetters('tasks', ['tasksTodo', 'tasksCompleted']),
