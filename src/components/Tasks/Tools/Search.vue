@@ -3,6 +3,7 @@
     outlined
     class="col"
     v-model="searchField"
+    v-select-all
     label="Search"
   >
     <template v-slot:append>
@@ -19,6 +20,7 @@
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
+import { selectAll } from 'src/directives/directive-select-all';
 
 export default {
   computed: {
@@ -35,6 +37,7 @@ export default {
   methods: {
     ...mapActions('tasks', ['setSearch']),
   },
+  directives: { selectAll }
 }
 </script>
 <style>
