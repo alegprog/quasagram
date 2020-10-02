@@ -5,13 +5,21 @@
       <search />
     </div>
 
+    <p
+      v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length"
+    >
+      No search results!
+    </p>
+
     <tasks
       v-if="Object.keys(tasksTodo).length"
       title="Todo"
       :tasks="tasksTodo"
       bgColor="bg-orange-4" />
 
-    <no-tasks v-else />
+    <no-tasks
+      v-else-if="!Object.keys(tasksTodo).length && !search"
+    />
 
     <tasks
       v-if="Object.keys(tasksCompleted).length"
@@ -35,7 +43,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'PageIndex',
@@ -51,6 +59,7 @@ export default {
     'search': require('components/Tasks/Tools/Search').default,
   },
   computed: {
+    ...mapState('tasks', ['search']),
     ...mapGetters('tasks', ['tasksTodo', 'tasksCompleted']),
   },
   mounted() {
