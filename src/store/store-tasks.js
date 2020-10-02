@@ -31,6 +31,7 @@ const mutations = {
   deleteTask: (state, id) => Vue.delete(state.tasks, id),
   addTask: (state, payload) => Vue.set(state.tasks, payload.id, payload.task),
   setSearch: (state, value) => state.search = value,
+  setSort: (state, value) => state.sort = value,
 };
 
 const actions = {
@@ -45,6 +46,7 @@ const actions = {
     commit('addTask', payload);
   },
   setSearch: ({ commit }, value) => commit('setSearch', value),
+  setSort: ({ commit }, value) => commit('setSort', value),
 };
 
 const getters = {
