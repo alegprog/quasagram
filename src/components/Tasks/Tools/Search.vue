@@ -18,7 +18,7 @@
   </q-input>
 </template>
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   computed: {
@@ -28,9 +28,12 @@ export default {
         return this.search;
       },
       set(value) {
-        console.log('Value: ', value);
+        this.setSearch(value);
       }
     },
+  },
+  methods: {
+    ...mapActions('tasks', ['setSearch']),
   },
 }
 </script>
