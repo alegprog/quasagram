@@ -22,7 +22,7 @@ const state = {
       dueTime: '12:30'
     }
   },
-  search: 'Test',
+  search: '',
 };
 
 const mutations = {
@@ -51,8 +51,11 @@ const getters = {
     let tasksFiltered = {};
     if (state.search) {
       Object.keys(state.tasks).forEach(key => {
-        let task = state.tasks[key];
-        if (task.name.includes(state.search)) {
+        let task = state.tasks[key],
+            taskNameLowerCase = task.name.toLowerCase(),
+            searchLowerCase = state.search.toLowerCase();
+
+        if (taskNameLowerCase.includes(searchLowerCase)) {
           tasksFiltered[key] = task;
         }
       });
