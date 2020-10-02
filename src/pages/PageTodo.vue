@@ -3,6 +3,7 @@
 
     <div class="row q-mb-lg">
       <search />
+      <sort />
     </div>
 
     <p
@@ -57,6 +58,7 @@ export default {
     'no-tasks': require('components/Tasks/NoTasks').default,
     'add-task': require('components/Tasks/Modals/AddTask').default,
     'search': require('components/Tasks/Tools/Search').default,
+    'sort': require('components/Tasks/Tools/Sort').default,
   },
   computed: {
     ...mapState('tasks', ['search']),
