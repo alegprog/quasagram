@@ -1,44 +1,49 @@
 <template>
-  <q-page class="q-pa-md">
+  <q-page>
 
-    <div class="row q-mb-lg">
-      <search />
-      <sort />
+    <div class="q-pa-md absolute full-width full-height column">
+
+      <div class="row q-mb-lg">
+        <search />
+        <sort />
+      </div>
+
+      <p
+        v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length"
+      >
+        No search results!
+      </p>
+
+      <q-scroll-area class="q-scroll-area-tasks">
+
+        <tasks-todo
+          v-if="Object.keys(tasksTodo).length"
+          :tasks="tasksTodo"
+        />
+
+        <no-tasks
+          v-else-if="!Object.keys(tasksTodo).length && !search"
+        />
+
+        <tasks-completed
+          v-if="Object.keys(tasksCompleted).length"
+          :tasks="tasksCompleted"
+          class="q-mb-xl"
+        />
+
+      </q-scroll-area>
+
+      <div class="absolute-bottom text-center q-mb-lg">
+        <q-btn
+          @click="showAddTask = true"
+          round
+          color="primary"
+          size="24px"
+          icon="add"
+        />
+      </div>
     </div>
 
-    <p
-      v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length"
-    >
-      No search results!
-    </p>
-
-    <div class="relative-position">
-
-      <tasks-todo
-        v-if="Object.keys(tasksTodo).length"
-        :tasks="tasksTodo"
-      />
-
-      <no-tasks
-        v-else-if="!Object.keys(tasksTodo).length && !search"
-      />
-
-      <tasks-completed
-        v-if="Object.keys(tasksCompleted).length"
-        :tasks="tasksCompleted"
-      />
-
-    </div>
-
-    <div class="absolute-bottom text-center q-mb-lg">
-      <q-btn
-        @click="showAddTask = true"
-        round
-        color="primary"
-        size="24px"
-        icon="add"
-      />
-    </div>
     <q-dialog v-model="showAddTask">
       <add-task @close="showAddTask = false" />
     </q-dialog>
@@ -74,4 +79,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.q-scroll-area-tasks {
+  display: flex;
+  flex-grow: 1;
+}
 </style>
