@@ -12,21 +12,23 @@
       No search results!
     </p>
 
-    <tasks
-      v-if="Object.keys(tasksTodo).length"
-      title="Todo"
-      :tasks="tasksTodo"
-      bgColor="bg-orange-4" />
+    <div class="relative-position">
 
-    <no-tasks
-      v-else-if="!Object.keys(tasksTodo).length && !search"
-    />
+      <tasks-todo
+        v-if="Object.keys(tasksTodo).length"
+        :tasks="tasksTodo"
+      />
 
-    <tasks
-      v-if="Object.keys(tasksCompleted).length"
-      title="Completed"
-      :tasks="tasksCompleted"
-      bgColor="bg-green-4" />
+      <no-tasks
+        v-else-if="!Object.keys(tasksTodo).length && !search"
+      />
+
+      <tasks-completed
+        v-if="Object.keys(tasksCompleted).length"
+        :tasks="tasksCompleted"
+      />
+
+    </div>
 
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
@@ -54,7 +56,8 @@ export default {
     }
   },
   components: {
-    'tasks': require('components/Tasks/Tasks').default,
+    'tasks-todo': require('components/Tasks/TasksTodo').default,
+    'tasks-completed': require('components/Tasks/TasksCompleted').default,
     'no-tasks': require('components/Tasks/NoTasks').default,
     'add-task': require('components/Tasks/Modals/AddTask').default,
     'search': require('components/Tasks/Tools/Search').default,
