@@ -63,7 +63,7 @@ const linksData = [
   {
     title: 'Settings',
     icon: 'settings',
-    link: 'settings'
+    link: '/settings'
   },
 ];
 
