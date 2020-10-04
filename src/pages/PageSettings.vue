@@ -64,6 +64,19 @@
         </q-item-section>
       </q-item>
 
+      <q-item
+        @click="emailUs"
+        tag="label"
+        v-ripple
+      >
+        <q-item-section>
+          <q-item-label>Email us</q-item-label>
+        </q-item-section>
+        <q-item-section side >
+          <q-icon name="chevron_right" />
+        </q-item-section>
+      </q-item>
+
    </q-list>
 
   </q-page>
@@ -98,6 +111,9 @@ export default {
     ...mapActions('settings', ['setShow12HourTimeFormat', 'setShowTasksInOneList']),
     visitOurWebsite() {
       openURL(process.env.VUE_APP_EXTERNAL_URL);
+    },
+    emailUs() {
+      window.location.href = `mailto:${process.env.VUE_APP_EMAIL_CONTACT}?subject=Awesome Todo feedback`;
     },
   },
 }
