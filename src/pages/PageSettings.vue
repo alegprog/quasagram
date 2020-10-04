@@ -51,6 +51,19 @@
         </q-item-section>
       </q-item>
 
+      <q-item
+        @click="visitOurWebsite"
+        tag="label"
+        v-ripple
+      >
+        <q-item-section>
+          <q-item-label>Visit our website</q-item-label>
+        </q-item-section>
+        <q-item-section side >
+          <q-icon name="chevron_right" />
+        </q-item-section>
+      </q-item>
+
    </q-list>
 
   </q-page>
@@ -58,6 +71,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import { openURL } from 'quasar';
 
 export default {
   name: 'PageSettings',
@@ -82,6 +96,9 @@ export default {
   },
   methods: {
     ...mapActions('settings', ['setShow12HourTimeFormat', 'setShowTasksInOneList']),
+    visitOurWebsite() {
+      openURL(process.env.VUE_APP_EXTERNAL_URL);
+    },
   },
 }
 </script>
