@@ -22,7 +22,7 @@
         />
 
         <no-tasks
-          v-else-if="!Object.keys(tasksTodo).length && !search"
+          v-else-if="!Object.keys(tasksTodo).length && !search && !settings.showTasksInOneList"
         />
 
         <tasks-completed
@@ -72,6 +72,7 @@ export default {
   computed: {
     ...mapState('tasks', ['search']),
     ...mapGetters('tasks', ['tasksTodo', 'tasksCompleted']),
+    ...mapGetters('settings', ['settings']),
   },
   mounted() {
     this.$root.$on('showAddTask', () => this.showAddTask = true);
