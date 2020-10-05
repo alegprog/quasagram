@@ -27,6 +27,9 @@ const actions = {
         console.error('Error: ', error.message);
       });
   },
+  logoutUser: () => {
+    firebaseAuth.signOut();
+  },
   handleAuthStateChange: ({ commit }) => {
     firebaseAuth.onAuthStateChanged(function(user) {
       if (user) {
