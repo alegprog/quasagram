@@ -9,7 +9,7 @@ const mutations = {
 };
 
 const actions = {
-  registerUser: ({}, payload) => {
+  registerUser({}, payload) {
     firebaseAuth.createUserWithEmailAndPassword(payload.email, payload.password)
       .then(response => {
         console.log('response: ', response);
@@ -18,7 +18,7 @@ const actions = {
         console.error('Error: ', error.message);
       });
   },
-  loginUser: ({}, payload) => {
+  loginUser({}, payload) {
     firebaseAuth.signInWithEmailAndPassword(payload.email, payload.password)
       .then(response => {
         console.log('response: ', response);
@@ -27,15 +27,17 @@ const actions = {
         console.error('Error: ', error.message);
       });
   },
-  logoutUser: () => {
+  logoutUser() {
     firebaseAuth.signOut();
   },
-  handleAuthStateChange: ({ commit }) => {
-    firebaseAuth.onAuthStateChanged(function(user) {
+  handleAuthStateChange({ commit }) {
+    firebaseAuth.onAuthStateChanged(user => {
       if (user) {
         commit('setLoggedIn', true);
+        this.$router.push('/');
       } else {
         commit('setLoggedIn', false);
+        this.$router.replace('/auth');
       }
     });
   },
