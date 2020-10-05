@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit.prevent="submitForm">
     <div class="row q-mb-md">
       <q-banner class="bg-grey-3 col">
         <template v-slot:avatar>
@@ -13,6 +13,8 @@
       <q-input
         outlined
         v-model="formData.email"
+        :rules="[ val => isValidEmailAddress(val) || 'Please enter a valid email addess.']"
+        lazy-rules
         class="col"
         label="Email"
         stack-label
@@ -23,6 +25,8 @@
       <q-input
         outlined
         v-model="formData.password"
+        :rules="[ val => val.length >= 6 || 'Please enter at least 6 characters.']"
+        lazy-rules
         type="password"
         class="col"
         label="Password"
@@ -33,6 +37,7 @@
     <div class="row justify-end">
 
       <q-btn
+        type="submit"
         color="primary"
         label="Register"
       />
@@ -49,6 +54,15 @@ export default {
         email: '',
         password: '',
       }
+    }
+  },
+  methods: {
+    submitForm() {
+
+    },
+    isValidEmailAddress(email) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
     }
   },
 }
