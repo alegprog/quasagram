@@ -66,6 +66,10 @@ export default {
     submitForm() {
       this.$refs.email.validate();
       this.$refs.password.validate();
+
+      if( !this.refs.email.hasError && !this.$refs.password.hasError) {
+        console.log('Register User!');
+      }
     },
   },
 }
