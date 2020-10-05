@@ -32,10 +32,10 @@ const mutations = {
   updateTask: (state, payload) => Object.assign(state.tasks[payload.id], payload.updates),
   deleteTask: (state, id) => Vue.delete(state.tasks, id),
   addTask: (state, payload) => Vue.set(state.tasks, payload.id, payload.task),
+  clearTasks: (state) => state.tasks = {},
   setSearch: (state, value) => state.search = value,
   setSort: (state, value) => state.sort = value,
   setTasksDownloaded: (state, value) => state.tasksDownloaded = value,
-  setEmptyTasks: (state) => state.tasks = {},
 };
 
 const actions = {
