@@ -79,9 +79,9 @@ export default {
     'sort': require('components/Tasks/Tools/Sort').default,
   },
   computed: {
-    ...mapState('tasks', ['search']),
+    ...mapState('tasks', ['search', 'tasksDownloaded']),
     ...mapGetters('tasks', ['tasksTodo', 'tasksCompleted']),
-    ...mapGetters('settings', ['settings', 'tasksDownloaded']),
+    ...mapGetters('settings', ['settings']),
   },
   mounted() {
     this.$root.$on('showAddTask', () => this.showAddTask = true);

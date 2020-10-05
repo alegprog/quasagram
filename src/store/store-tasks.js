@@ -35,6 +35,7 @@ const mutations = {
   setSearch: (state, value) => state.search = value,
   setSort: (state, value) => state.sort = value,
   setTasksDownloaded: (state, value) => state.tasksDownloaded = value,
+  setEmptyTasks: (state) => state.tasks = {},
 };
 
 const actions = {
@@ -53,6 +54,9 @@ const actions = {
   fbReadData({ commit }) {
     const userId = firebaseAuth.currentUser.uid;
     const userTasksRef = firebaseDb.ref(`tasks/${ userId }`);
+
+    // Initial check for data
+    userTasksRef.once('value', snapshot => commit('setTasksDownloaded', true));
 
     // child added
     userTasksRef.on('child_added', snapshot => {
