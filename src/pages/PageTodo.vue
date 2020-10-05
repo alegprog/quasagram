@@ -48,7 +48,9 @@
 
       </template>
       <template v-else>
-        <p>Loading...</p>
+        <span class="absolute-center">
+          <q-spinner color="primary" size="3em" />
+        </span>
       </template>
     </div>
 
