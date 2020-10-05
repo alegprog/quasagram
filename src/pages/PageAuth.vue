@@ -1,0 +1,7 @@
+<template>
+  <q-page padding>
+    <p>Auth Page</p>
+  </q-page>
+</template>
+<script>
+</script>
