@@ -5,7 +5,7 @@
         <template v-slot:avatar>
           <q-icon name="account_circle" color="primary" />
         </template>
-        Register to access your Todos anywhere!
+        {{ tab | titleCase }} to access your Todos anywhere!
       </q-banner>
     </div>
 
@@ -41,7 +41,7 @@
       <q-btn
         type="submit"
         color="primary"
-        label="Register"
+        :label="tab"
       />
 
     </div>
@@ -77,5 +77,10 @@ export default {
       }
     },
   },
+  filters: {
+    titleCase(value) {
+      return `${ value.charAt(0).toUpperCase() }${ value.slice(1) }`;
+    }
+  }
 }
 </script>
