@@ -51,6 +51,8 @@ const actions = {
   fbReadData({ commit }) {
     const userId = firebaseAuth.currentUser.uid;
     const userTasks = firebaseDb.ref(`tasks/${userId}`);
+
+    // child added
     userTasks.on('child_added', snapshot => {
       const task = snapshot.val();
       const payload = {
@@ -59,6 +61,17 @@ const actions = {
       };
       commit('addTask', payload);
     });
+
+    // child changed
+    userTasks.on('child_changed', snapshot => {
+      const task = snapshot.val();
+      const payload = {
+        id: snapshot.key,
+        updates: task,
+      };
+      commit('updateTask', payload);
+    });
+
   },
 };
 
