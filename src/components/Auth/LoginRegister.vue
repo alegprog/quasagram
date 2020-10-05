@@ -50,6 +50,7 @@
 </template>
 <script>
 export default {
+  props: ['tab'],
   data() {
     return {
       formData: {
@@ -67,8 +68,12 @@ export default {
       this.$refs.email.validate();
       this.$refs.password.validate();
 
-      if( !this.refs.email.hasError && !this.$refs.password.hasError) {
-        console.log('Register User!');
+      if ( !this.refs.email.hasError && !this.$refs.password.hasError) {
+        if (this.tab == 'login') {
+          console.log('login the user!');
+        } else {
+          console.log('register the user!');
+        }
       }
     },
   },
