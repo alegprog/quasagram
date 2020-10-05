@@ -56,7 +56,7 @@ const actions = {
     const userTasksRef = firebaseDb.ref(`tasks/${ userId }`);
 
     // Initial check for data
-    userTasksRef.once('value', snapshot => commit('setTasksDownloaded', true));
+    userTasksRef.once('value', snapshot => commit('setTasksDownloaded', true), error => console.error('Error: ', error.message));
 
     // child added
     userTasksRef.on('child_added', snapshot => {
