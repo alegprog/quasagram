@@ -3,46 +3,53 @@
 
     <div class="q-pa-md absolute full-width full-height column">
 
-      <div class="row q-mb-lg">
-        <search />
-        <sort />
-      </div>
+      <template v-if="tasksDownloaded">
 
-      <p
-        v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length"
-      >
-        No search results!
-      </p>
+        <div class="row q-mb-lg">
+          <search />
+          <sort />
+        </div>
 
-      <q-scroll-area class="q-scroll-area-tasks">
+        <p
+          v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length"
+        >
+          No search results!
+        </p>
 
-        <tasks-todo
-          v-if="Object.keys(tasksTodo).length"
-          :tasks="tasksTodo"
-        />
+        <q-scroll-area class="q-scroll-area-tasks">
 
-        <no-tasks
-          v-else-if="!Object.keys(tasksTodo).length && !search && !settings.showTasksInOneList"
-        />
+          <tasks-todo
+            v-if="Object.keys(tasksTodo).length"
+            :tasks="tasksTodo"
+          />
 
-        <tasks-completed
-          v-if="Object.keys(tasksCompleted).length"
-          :tasks="tasksCompleted"
-          class="q-mb-xl"
-        />
+          <no-tasks
+            v-else-if="!Object.keys(tasksTodo).length && !search && !settings.showTasksInOneList"
+          />
 
-      </q-scroll-area>
+          <tasks-completed
+            v-if="Object.keys(tasksCompleted).length"
+            :tasks="tasksCompleted"
+            class="q-mb-xl"
+          />
 
-      <div class="absolute-bottom text-center q-mb-lg no-pointer-events">
-        <q-btn
-          @click="showAddTask = true"
-          class="all-pointer-events"
-          round
-          color="primary"
-          size="24px"
-          icon="add"
-        />
-      </div>
+        </q-scroll-area>
+
+        <div class="absolute-bottom text-center q-mb-lg no-pointer-events">
+          <q-btn
+            @click="showAddTask = true"
+            class="all-pointer-events"
+            round
+            color="primary"
+            size="24px"
+            icon="add"
+          />
+        </div>
+
+      </template>
+      <template v-else>
+        <p>Loading...</p>
+      </template>
     </div>
 
     <q-dialog v-model="showAddTask">
@@ -72,7 +79,7 @@ export default {
   computed: {
     ...mapState('tasks', ['search']),
     ...mapGetters('tasks', ['tasksTodo', 'tasksCompleted']),
-    ...mapGetters('settings', ['settings']),
+    ...mapGetters('settings', ['settings', 'tasksDownloaded']),
   },
   mounted() {
     this.$root.$on('showAddTask', () => this.showAddTask = true);

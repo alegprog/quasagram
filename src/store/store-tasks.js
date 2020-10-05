@@ -25,6 +25,7 @@ const state = {
   },
   search: '',
   sort: 'dueDate',
+  tasksDownloaded: false,
 };
 
 const mutations = {
@@ -33,6 +34,7 @@ const mutations = {
   addTask: (state, payload) => Vue.set(state.tasks, payload.id, payload.task),
   setSearch: (state, value) => state.search = value,
   setSort: (state, value) => state.sort = value,
+  setTasksDownloaded: (state, value) => state.tasksDownloaded = value,
 };
 
 const actions = {
