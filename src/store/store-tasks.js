@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { uid } from 'quasar';
+import { uid, Notify } from 'quasar';
 import { firebaseDb, firebaseAuth } from 'boot/firebase';
 import { showErrorMessage } from 'src/functions/function-show-error-message';
 
@@ -95,21 +95,36 @@ const actions = {
     const userId = firebaseAuth.currentUser.uid;
     const taskRef = firebaseDb.ref(`tasks/${ userId }/${ payload.id }`);
     taskRef.set(payload.task, error => {
-      if (error) showErrorMessage(error.message);
+      if (error) {
+        showErrorMessage(error.message);
+      } else {
+        Notify.create('Task added!');
+      }
     });
   },
   fbUpdateTask({}, payload) {
     const userId = firebaseAuth.currentUser.uid;
     const taskRef = firebaseDb.ref(`tasks/${ userId }/${ payload.id }`);
     taskRef.update(payload.updates, error => {
-      if (error) showErrorMessage(error.message);
+      if (error) {
+        showErrorMessage(error.message);
+      } else {
+        const keys = Object.keys(payload.updates);
+        if (!(keys.includes('completed') && keys.length === 1)) {
+          Notify.create('Task updated!');
+        }
+      }
     });
   },
   fbDeleteTask({}, taskId) {
     const userId = firebaseAuth.currentUser.uid;
     const taskRef = firebaseDb.ref(`tasks/${ userId }/${ taskId }`);
     taskRef.remove(error => {
-      if (error) showErrorMessage(error.message);
+      if (error) {
+        showErrorMessage(error.message);
+      } else {
+        Notify.create('Task deleted!');
+      }
     });
   },
 };
