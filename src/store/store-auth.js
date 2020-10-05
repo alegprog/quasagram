@@ -1,5 +1,6 @@
 import { LocalStorage } from 'quasar';
 import { firebaseAuth } from 'boot/firebase';
+import { showErrorMessage } from 'src/functions/function-show-error-message';
 
 const state = {
   loggedIn: false,
@@ -16,7 +17,7 @@ const actions = {
         console.log('response: ', response);
       })
       .catch(error => {
-        console.error('Error: ', error.message);
+        showErrorMessage(error.message);
       });
   },
   loginUser({}, payload) {
@@ -25,7 +26,7 @@ const actions = {
         console.log('response: ', response);
       })
       .catch(error => {
-        console.error('Error: ', error.message);
+        showErrorMessage(error.message);
       });
   },
   logoutUser() {
