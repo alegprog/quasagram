@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { uid } from 'quasar';
-import { firebaseDb } from 'boot/firebase';
+import { firebaseDb, firebaseAuth } from 'boot/firebase';
 
 const state = {
   tasks: {
@@ -49,7 +49,16 @@ const actions = {
   setSearch: ({ commit }, value) => commit('setSearch', value),
   setSort: ({ commit }, value) => commit('setSort', value),
   fbReadData({ commit }) {
-    console.log('start reading data from firebase');
+    const userId = firebaseAuth.currentUser.uid;
+    const userTasks = firebaseDb.ref(`tasks/${userId}`);
+    userTasks.on('child_added', snapshot => {
+      const task = snapshot.val();
+      const payload = {
+        id: snapshot.key,
+        task,
+      };
+      commit('addTask', payload);
+    });
   },
 };
 
