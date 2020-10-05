@@ -72,6 +72,12 @@ const actions = {
       commit('updateTask', payload);
     });
 
+    // child removed
+    userTasks.on('child_removed', snapshot => {
+      const taskId = snapshot.key;
+      commit('deleteTask', taskId);
+    });
+
   },
 };
 
