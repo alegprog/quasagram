@@ -57,6 +57,7 @@ export const menuTemplate = [
         { role: 'selectAll' },
         {
           label: 'Settings',
+          accelerator: 'CmdOrCtrl+,',
           click() {
             mainWindow.webContents.send('show-settings');
           }
