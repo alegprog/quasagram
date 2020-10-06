@@ -15,7 +15,7 @@ if (process.env.PROD) {
   global.__statics = __dirname
 }
 
-let mainWindow
+export let mainWindow
 
 const menu = Menu.buildFromTemplate(menuTemplate);
 
