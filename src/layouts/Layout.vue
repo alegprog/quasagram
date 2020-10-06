@@ -119,7 +119,7 @@ export default {
         message: 'Really quit Awesome Todo?',
         cancel: true,
         persistent: true
-      }),onOk(() => {
+      }).onOk(() => {
         if (this.$q.platform.is.electron) {
           require('electron').ipcRenderer.send('quit-app');
         }
