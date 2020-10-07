@@ -1,0 +1,18 @@
+{
+    "android": {
+        "debug": {
+            "keystore": "./quasar-debug-key.jks",
+            "storePassword": "telecom",
+            "alias": "quasar-debug",
+            "password" : "telecom",
+            "keystoreType": "jks"
+        },
+        "release": {
+            "keystore": "./quasar-release-key.jks",
+            "storePassword": "telecom",
+            "alias": "quasar-release",
+            "password" : "telecom",
+            "keystoreType": "jks"
+        }
+    }
+}

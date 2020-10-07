@@ -34,3 +34,5 @@ yarn-error.log*
 .env
 .env.prod
 !.env.example
+.firebase/
+*.jks
