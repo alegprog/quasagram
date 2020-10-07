@@ -2,7 +2,7 @@
   <div class="row q-mb-sm">
     <q-input
       outlined
-      autofocus
+      v-autofocus
       v-select-all
       :value="name"
       @input="$emit('update:name', $event)"
@@ -23,11 +23,13 @@
 </template>
 <script>
 import { selectAll } from 'src/directives/directive-select-all';
+import { autofocus } from 'src/directives/directive-autofocus';
 
 export default {
   props: ['name'],
   directives: {
     selectAll,
+    autofocus,
   },
 }
 </script>
