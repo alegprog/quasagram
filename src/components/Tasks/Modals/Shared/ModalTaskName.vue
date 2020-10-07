@@ -2,7 +2,7 @@
   <div class="row q-mb-sm">
     <q-input
       outlined
-      v-autofocus
+      v-autofocus="{ delayCordova: 700 }"
       v-select-all
       :value="name"
       @input="$emit('update:name', $event)"
