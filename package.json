@@ -28,7 +28,8 @@
     "electron-packager": "^14.1.1",
     "eslint": "^7.9.0",
     "eslint-plugin-html": "^6.1.0",
-    "eslint-plugin-vue": "^6.2.2"
+    "eslint-plugin-vue": "^6.2.2",
+    "workbox-webpack-plugin": "^5.0.0"
   },
   "browserslist": [
     "last 10 Chrome versions",
