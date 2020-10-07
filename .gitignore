@@ -36,4 +36,6 @@ yarn-error.log*
 .env.prod
 app-resources/
 .firebase/
-
+build.cordova.json
+quasar-debug-key.jks
+quasar-release-key.jks
