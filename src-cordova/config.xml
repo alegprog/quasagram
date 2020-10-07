@@ -16,9 +16,13 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="KeyboardDisplayRequiresUserAction" value="false" />
     <platform name="android">
+        <splash src="../app-resources/android/splash/splash.9.png" />
+        <icon height="96" src="../app-resources/android/icons/icon-96-xhdpi.png" width="96" />
         <allow-intent href="market:*" />
     </platform>
     <platform name="ios">
+        <splash src="../app-resources/ios/splash/Default@2x~universal~anyany.png" />
+        <icon height="40" src="../app-resources/ios/icons/icon-40.png" width="40" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
